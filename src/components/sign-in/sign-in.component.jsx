@@ -3,9 +3,26 @@ import React from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-import {auth, signInWithGoogle} from "../../firebase/firebase.utils";
+import {signInWithGoogle} from "../../firebase/firebase.utils";
 
 import "./sign-in.styles.scss";
+
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+
+const auth = getAuth();
+const email = "";
+const password = "";
+
+signInWithEmailAndPassword(auth, email, password)
+  .then(userCredential => {
+    // Signed in
+    const user = userCredential.user;
+    // ...
+  })
+  .catch(error => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -17,18 +34,18 @@ class SignIn extends React.Component {
     };
   }
 
-  handleSumbit = async event => {
-    event.preventDefault();
-
-    const {email, password} = this.state;
-
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({email: "", password: ""});
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // handleSumbit = async event => {
+  //   event.preventDefault();
+  //
+  //   const {email, password} = this.state;
+  //
+  //   try {
+  //     await auth.signInWithEmailAndPassword(email, password);
+  //     this.setState({email: "", password: ""});
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   handleChange = event => {
     const {value, name} = event.target;
