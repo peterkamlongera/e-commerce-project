@@ -16,10 +16,13 @@ const password = "";
 signInWithEmailAndPassword(auth, email, password)
   .then(userCredential => {
     // Signed in
+    // eslint-disable-next-line
     const user = userCredential.user;
     // ...
   })
+  // eslint-disable-next-line
   .catch(error => {
+    // eslint-disable-next-line
     const errorCode = error.code;
     const errorMessage = error.message;
   });
